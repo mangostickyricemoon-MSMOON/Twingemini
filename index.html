@@ -33,12 +33,35 @@
         background: white;
         border-radius: 50%;
         animation: twinkle 2s infinite alternate;
-        z-index: -1;   /* ✅ ส่งดาวไปอยู่หลังสุด */
+        z-index: -1;
       }
 
       @keyframes twinkle {
         from { opacity: 0.3; }
         to   { opacity: 1; }
+      }
+
+      /* ✅ ปุ่ม fullscreen */
+      .fullscreen-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 24px;
+        border: 2px solid #00ffcc;
+        border-radius: 6px; /* ✅ ขอบสี่เหลี่ยมมนเล็กน้อย */
+        background: rgba(0,0,0,0.6);
+        color: #00ffcc;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 9999;
+      }
+
+      .fullscreen-btn:hover {
+        background: rgba(0,255,204,0.2);
+        transform: translateX(-50%) scale(1.05);
       }
     </style>
     <script type="module" crossorigin src="/assets/index-pu-bqJA1.js"></script>
@@ -69,6 +92,9 @@
     <!-- ✅ root ของ React -->
     <div id="root"></div>
 
+    <!-- ✅ ปุ่ม fullscreen -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
+
     <!-- ✅ สคริปต์สร้างดาวสุ่ม -->
     <script>
       const numStars = 50;
@@ -81,6 +107,17 @@
         star.style.width = (Math.random() * 2 + 1) + "px";
         star.style.height = star.style.width;
         document.body.appendChild(star);
+      }
+
+      // ✅ ฟังก์ชัน toggle fullscreen
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
       }
     </script>
   </body>
