@@ -111,8 +111,9 @@
 
       // ✅ ฟังก์ชัน toggle fullscreen
       function toggleFullscreen() {
+        const root = document.getElementById("root");
         if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen();
+          root.requestFullscreen(); // ✅ fullscreen เฉพาะ #root
         } else {
           if (document.exitFullscreen) {
             document.exitFullscreen();
