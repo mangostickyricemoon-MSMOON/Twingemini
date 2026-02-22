@@ -1,0 +1,232 @@
+src/
+├── App.tsx                     # (1) Root รวมทุก component และ modal
+├── App.css                     # style หลัก เช่น body, viewport
+│
+├── components/                 # UI components
+│   ├── Header.tsx              # (2) Header
+│   ├── Header.css              # style ของ Header
+│   ├── StatusBar.tsx           # (3) Status bar
+│   ├── StatusBar.css           # style ของ StatusBar
+│   ├── CardGrid.tsx            # (4) Grid ของการ์ด
+│   ├── CardGrid.css            # style ของ Grid
+│   ├── Card.tsx                # (5) การ์ดแต่ละใบ
+│   ├── Card.css                # style ของ Card
+│   ├── Footer.tsx              # (6) Footer
+│   ├── Footer.css              # style ของ Footer
+│   ├── PoolBalance.tsx         # ใช้ใน AdminModal
+│   ├── TryAgain.tsx            # (16) ปุ่มเล่นใหม่
+│   └── TryAgain.css            # style ของ TryAgain
+│
+├── modals/                     # Modal components
+│   ├── AnnouncementModal.tsx   # (7)
+│   ├── AnnouncementModal.css   # style ของ AnnouncementModal
+│   ├── AdminModal.tsx          # (8)
+│   ├── AdminModal.css          # style ของ AdminModal
+│   ├── TicketModal.tsx         # (9)
+│   ├── TicketModal.css         # style ของ TicketModal
+│   ├── GuardModal.tsx          # (10)
+│   ├── GuardModal.css          # style ของ GuardModal
+│   ├── HowToModal.tsx          # (11)
+│   ├── HowToModal.css          # style ของ HowToModal
+│   ├── ItemModal.tsx           # (12)
+│   ├── ItemModal.css           # style ของ ItemModal
+│   ├── WalletModal.tsx         # (13)
+│   ├── WalletModal.css         # style ของ WalletModal
+│   ├── RewardModal.tsx         # (14)
+│   ├── RewardModal.css         # style ของ RewardModal
+│   ├── MascotModal.tsx         # (15)
+│   └── MascotModal.css         # style ของ MascotModal
+│
+├── hooks/
+│   ├── useWallet.ts            # (17) Hook สำหรับ wallet
+│   └── useContract.ts          # (18) Hook สำหรับ contract
+│
+├── utils/
+│   ├── contract.ts             # (19) ฟังก์ชันเชื่อม smart contract
+│   ├── cards.ts                # (20) ฟังก์ชันสุ่มการ์ด
+│   └── audio.ts                # (21) ฟังก์ชันเสียง hover/click
+│
+└── assets/                     # รูปภาพ/เสียง
+    ├── *.png                   # ไฟล์รูปทั้งหมด
+    ├── *.mp3                   # ไฟล์เสียงทั้งหมด
+    └── background.png          # พื้นหลัง
+
+__________________________________________________________________________
+
+
+
+src/
+├── App.tsx                # (1) Root รวมทุก component และ modal
+├── App.css                # style หลัก
+│
+├── components/            # UI components
+│   ├── Header.tsx         # (2) Header
+│   ├── StatusBar.tsx      # (3) Status bar
+│   ├── CardGrid.tsx       # (4) Grid ของการ์ด
+│   ├── Card.tsx           # (5) การ์ดแต่ละใบ
+│   ├── Footer.tsx         # (6) Footer
+│   ├── PoolBalance.tsx    # ใช้ใน AdminModal
+│   └── TryAgain.tsx       # (16) ปุ่มเล่นใหม่
+│
+├── modals/                # Modal components
+│   ├── AnnouncementModal.tsx   # (7)
+│   ├── AdminModal.tsx          # (8)
+│   ├── TicketModal.tsx         # (9)
+│   ├── GuardModal.tsx          # (10)
+│   ├── HowToModal.tsx          # (11)
+│   ├── ItemModal.tsx           # (12)
+│   ├── WalletModal.tsx         # (13)
+│   ├── RewardModal.tsx         # (14)
+│   └── MascotModal.tsx         # (15)
+│
+├── hooks/
+│   ├── useWallet.ts       # (17)
+│   └── useContract.ts     # (18)
+│
+├── utils/
+│   ├── contract.ts        # (19)
+│   ├── cards.ts           # (20)
+│   └── audio.ts           # (21)
+│
+└── assets/                # รูปภาพ/เสียง
+    ├── *.png
+    ├── *.mp3
+    └── ...
+
+src/
+├── App.css                 # style หลัก เช่น body, viewport
+│
+├── components/
+│   ├── Header.css          # style ของ Header
+│   ├── StatusBar.css       # style ของ StatusBar
+│   ├── CardGrid.css        # style ของ Grid
+│   ├── Card.css            # style ของ Card
+│   ├── Footer.css          # style ของ Footer
+│   └── TryAgain.css        # style ของ TryAgain
+│
+├── modals/
+│   ├── AnnouncementModal.css
+│   ├── AdminModal.css
+│   ├── TicketModal.css
+│   ├── GuardModal.css
+│   ├── HowToModal.css
+│   ├── ItemModal.css
+│   ├── WalletModal.css
+│   ├── RewardModal.css
+│   └── MascotModal.css
+
+
+1. App.tsx
+Root ของโปรเจกต์
+
+รวมทุก component เข้ามาใช้งาน
+
+จัดการ state หลัก เช่น cards, flipped, matched, showModal ต่าง ๆ
+
+Render <Header />, <StatusBar />, <CardGrid />, <Footer />, และ modal ต่าง ๆ
+
+2. components/Header.tsx
+โลโก้ + wallet status + announcement button
+
+ใช้ props: isConnected, address, setShowAnnouncement, playHoverSound
+
+3. components/StatusBar.tsx
+แสดง turn left, match count
+
+ปุ่ม toggle เสียง 🔇/🔊
+
+ใช้ props: picksTotal, picksAvailable, isMuted, toggleMute, playHoverSound
+
+4. components/CardGrid.tsx
+แสดงการ์ดทั้งหมดใน grid
+
+ใช้ props: cards, flipped, matched, handleFlip
+
+Render <Card />
+
+5. components/Card.tsx
+การ์ดแต่ละใบ
+
+ใช้ props: card, isFlipped, onFlip
+
+Render mangoIcon หรือ card image
+
+6. components/Footer.tsx
+ปุ่ม navigation: Home, HowTo, Ticket, Item, Wallet
+
+ใช้ props: setShowAdminModal, setShowHowToModal, setShowTicketModal, setShowItemModal, setShowWalletModal
+
+7. modals/AnnouncementModal.tsx
+Modal แรกที่โชว์ Welcome
+
+ปุ่ม Close → เปิดเสียงพื้นหลัง
+
+8. modals/AdminModal.tsx
+ฟังก์ชัน Deposit, Withdraw, Withdraw All
+
+ใช้ PoolBalance component
+
+ปุ่ม Close
+
+9. modals/TicketModal.tsx
+เลือกตั๋ว (ราคา + picks)
+
+ปุ่ม Buy, Back
+
+10. modals/GuardModal.tsx
+แสดงข้อความ guardMessage
+
+ปุ่ม OK
+
+11. modals/HowToModal.tsx
+อธิบายวิธีเล่นเกม
+
+Ticket prices + rewards list
+
+ปุ่ม Back
+
+12. modals/ItemModal.tsx
+แสดงข้อความ Coming Soon
+
+ปุ่ม Close
+
+13. modals/WalletModal.tsx
+Connect / Disconnect wallet
+
+ปุ่ม Close
+
+14. modals/RewardModal.tsx
+แสดงข้อความ Reward transferred
+
+ปุ่ม OK → เปิด MascotModal
+
+15. modals/MascotModal.tsx
+แสดง Mascot Win/Lose
+
+เล่นเสียง Win/Lose
+
+ปุ่ม Close → เปิด TryAgain
+
+16. components/TryAgain.tsx
+ปุ่ม Play Again
+
+ใช้ props: resetGame
+
+17. hooks/useWallet.ts
+Hook สำหรับจัดการ wallet
+
+ฟังก์ชัน connect, disconnect, admin check
+
+18. hooks/useContract.ts
+Hook สำหรับ contract interaction
+
+19. utils/contract.ts
+ฟังก์ชัน getContract, CONTRACT_ADDRESS
+
+20. utils/cards.ts
+ฟังก์ชัน getRandomCards()
+
+รับ cardImages → คืนค่า paired shuffled cards
+
+21. utils/audio.ts
+ฟังก์ชัน playHoverSound, playClickSound, toggleMute

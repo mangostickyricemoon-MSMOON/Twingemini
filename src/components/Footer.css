@@ -1,0 +1,122 @@
+.footer {
+  width: calc(100% + 1rem); /* ชดเชย padding ซ้าย+ขวา ของ viewport */
+  position: relative; 
+  left: 0; 
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+
+  background-image: url('../assets/Texture.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg,#00f5ff,#2bc6e9,#00f5ff,#2bc6e9) 1;
+  border-image-slice: 1;
+
+  box-shadow: 0 -2px 12px rgba(0, 245, 255, 0.8),
+              0 -4px 24px rgba(43, 198, 233, 0.6);
+
+  animation: neonBorder 3s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes neonBorder {
+  0% { border-image-source: linear-gradient(90deg,#00f5ff,#2bc6e9,#00f5ff); }
+  50% { border-image-source: linear-gradient(90deg,#2bc6e9,#00f5ff,#2bc6e9); }
+  100% { border-image-source: linear-gradient(90deg,#00f5ff,#2bc6e9,#00f5ff); }
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.nav-icon {
+  height: auto;
+  object-fit: contain;
+}
+
+/* ✅ Desktop ขยายใหญ่ขึ้น */
+@media (min-width: 1024px) {
+  .footer {
+    height: 100px; /* footer ใหญ่ขึ้น */
+  }
+  .nav-icon {
+    width: 80px;   /* icon ใหญ่ขึ้น */
+  }
+}
+
+/* ✅ Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .footer {
+    height: 90px;
+  }
+  .nav-icon {
+    width: 70px;
+  }
+}
+
+/* ✅ Mobile เต็มจอ */
+@media (max-width: 480px) {
+  .footer {
+    height: 10vh; /* ใช้ vh เพื่อ fit จอเล็ก */
+  }
+  .nav-icon {
+    width: 48px;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .footer {
+    height: 12vh;              /* ใช้ vh เพื่อ fit จอแนวนอนเล็ก */
+    transform: scale(1);     /* ✅ zoom out ให้พอดีจอ */
+    transform-origin: center bottom;
+  }
+  .nav-icon {
+    width: 40px;               /* icon เล็กลง */
+  }
+}
+
+/* Tablet Landscape */
+@media (min-width: 769px) and (max-width: 1023px) and (orientation: landscape) {
+  .footer {
+    height: 100px;             /* footer ใหญ่ขึ้น */
+    transform: scale(1);    /* ✅ zoom out เล็กน้อย */
+    transform-origin: center bottom;
+    position: relative; 
+    left: 0px; 
+    right: -30px;
+  }
+  .nav-icon {
+    width: 60px;
+  }
+}
+
+/* Desktop Landscape */
+@media (min-width: 1024px) and (orientation: landscape) {
+  .footer {
+    width: 130%;
+    height: 100px;             /* footer ใหญ่ขึ้น */
+    transform: scale(0.8);    /* ✅ zoom out เล็กน้อย */
+    transform-origin: center bottom;
+    position: relative; 
+    left: 0px; 
+    right: -10px;
+  }
+  .nav-icon {
+    width: 80px;
+  }
+}
+

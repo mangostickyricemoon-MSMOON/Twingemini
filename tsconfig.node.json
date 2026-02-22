@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "composite": true,                // ✅ ต้องมี
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"]                 // ✅ ให้ Node type ใช้งานได้
+  },
+  "include": ["vite.config.ts"]
+}

@@ -1,0 +1,31 @@
+.mango-btn {
+  background-color: rgba(0, 0, 0, 0.2); /* ✅ โปร่งแสงเฉพาะพื้นหลัง */
+  border: 3px solid #fff;
+  cursor: pointer;
+  width: 100%;              /* ✅ ให้เต็มพื้นที่ของ card container */
+  aspect-ratio: 1 / 1.2;      /* ✅ การ์ดเป็นสี่เหลี่ยมจัตุรัส */
+  display: flex;
+  justify-content: center;  /* ✅ จัดกลางแนวนอน */
+  align-items: center;      /* ✅ จัดกลางแนวตั้ง */
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden; /* ✅ กันภาพล้นออกนอกกรอบ */
+}
+
+.mango-btn:hover {
+  transform: scale(1.03);   /* ✅ ขยายเล็กน้อยเมื่อ hover */
+}
+
+.mango-btn:disabled {
+  cursor: default;
+  opacity: 1;             /* ✅ ทำให้ดูจางลงเมื่อถูก disable */
+}
+
+.mango-img {
+  width: 100%;              /* ✅ ให้รูปเต็มพื้นที่ปุ่ม */
+  height: 100%;
+  object-fit: cover;        /* ✅ ครอบรูปให้พอดี card */
+  border-radius: 12px;
+}

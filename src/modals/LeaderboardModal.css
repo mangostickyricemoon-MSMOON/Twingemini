@@ -1,0 +1,167 @@
+.leaderboard-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,30,0.6), rgba(0,0,0,0.8));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.leaderboard-modal-content {
+  background: rgba(10, 10, 30, 0.85);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 80%;
+  width: 80%;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+  margin: auto;
+}
+
+/* เอฟเฟกต์ไฟนีออนวิ่งรอบกรอบ */
+.leaderboard-modal-content::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(270deg, #00ffff, #020a7a, #00ffcc, #ffcc00);
+  background-size: 600% 600%;
+  animation: neonBorder 8s linear infinite;
+
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+@keyframes neonBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.leaderboard-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #020a7a;
+}
+
+/* ✅ Scrollable container */
+.leaderboard-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid #00ffff;
+  border-radius: 8px;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  border: 1px solid #00ffff;
+  padding: 0.6rem;
+  text-align: center;
+}
+
+/* ✅ แยกพื้นหลังหัวข้อ */
+.leaderboard-table th {
+  background: rgba(0, 255, 255, 0.25); 
+  color: #00ffff;
+  font-weight: bold;
+}
+
+/* ✅ แถวคู่ */
+.leaderboard-table tr:nth-child(even) {
+  background: rgba(0,0,30,0.4);
+}
+
+/* ✅ Highlight Top 3 ด้วยสีตัวหนังสือ + glow */
+.leaderboard-table tr:first-child td {
+  color: #ffd700; /* Gold */
+  font-weight: bold;
+  text-shadow: 0 0 8px #ffd700, 0 0 15px #ffcc00;
+}
+
+.leaderboard-table tr:nth-child(2) td {
+  color: #c0c0c0; /* Silver */
+  font-weight: bold;
+  text-shadow: 0 0 8px #c0c0c0, 0 0 15px #d9d9d9;
+}
+
+.leaderboard-table tr:nth-child(3) td {
+  color: #cd7f32; /* Bronze */
+  font-weight: bold;
+  text-shadow: 0 0 8px #cd7f32, 0 0 15px #d98c4c;
+}
+
+.leaderboard-close-btn {
+  background: linear-gradient(90deg, #00ffff, #020a7a);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.leaderboard-close-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffff, 0 0 25px #ff00ff;
+}
+
+.leaderboard-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* ✅ ระยะห่างระหว่างปุ่ม */
+  margin-top: 1rem;
+}
+
+.leaderboard-close-btn {
+  background: linear-gradient(90deg, #00ffff, #020a7a);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.leaderboard-close-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00ffff, 0 0 25px #ff00ff;
+}
+
+/* ✅ ปุ่ม Finished แยก style */
+.leaderboard-finish-btn {
+  background: linear-gradient(90deg, #ff0066, #9900ff);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.leaderboard-finish-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff0066, 0 0 25px #9900ff;
+}

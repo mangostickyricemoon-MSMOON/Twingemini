@@ -1,0 +1,236 @@
+/* ✅ Header */
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
+  background: linear-gradient(90deg,#ff7a00,#ffb300,#ffd800,#b6ff00,#38a700);
+  padding: 4px 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo img {
+  height: 30px;
+  width: auto;
+  padding: 0px 10px;
+}
+
+.main-header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  margin-right: 20px;
+}
+
+.main-header a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #020000;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.main-header a:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+}
+
+/* ✅ ปุ่ม Home และ PlayX */
+.btn-home,
+.btn-playx {
+  display: inline-block;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 24px;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-home:hover,
+.btn-playx:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* ✅ ปุ่ม Donate */
+.btn-donate {
+  display: inline-block;
+  padding: 8px 14px;
+  background: linear-gradient(
+    135deg,
+    #C6425D 0%,
+    #E54C5D 25%,
+    #FC4558 50%,
+    #FC4060 75%,
+    #FC3C68 100%
+  );
+  color: #ffffff;
+  border-radius: 24px;
+  text-decoration: none;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 6px 14px rgba(255, 59, 167, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn-donate:hover {
+  background: #ff2a9a;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(255, 59, 167, 0.45);
+}
+
+.btn-donate:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(255, 59, 167, 0.3);
+}
+
+.btn-donate:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* ✅ Banner */
+.banner {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.banner-img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  max-height: 250px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ดาววิบวับ */
+html::before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow:
+    50px 100px white,
+    120px 200px white,
+    300px 400px white,
+    600px 150px white,
+    800px 500px white,
+    200px 300px white,
+    400px 250px white,
+    700px 350px white,
+    900px 100px white,
+    100px 600px white,
+    500px 700px white,
+    750px 450px white,
+    350px 550px white;
+  animation: twinkle 2s infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.3; }
+  to   { opacity: 1; }
+}
+
+/* ✅ Responsive */
+
+/* 📱 มือถือเล็กกว่า 375px */
+@media (max-width: 374px) {
+  .main-header {
+    transform: scale(1);
+    transform-origin: top center;
+    height: 30px;
+  }
+  .logo img {
+    height: 25px;
+  }
+  .main-header a {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+  .banner-img {
+    max-width: 374px;
+    max-height: 180px;
+  }
+}
+
+/* 📱 มือถือเล็กกว่า 480px */
+@media (max-width: 479px) {
+  .main-header {
+    transform: scale(1);
+    transform-origin: top center;
+    height: 32px;
+  }
+  .logo img {
+    height: 30px;
+  }
+  .main-header a {
+    font-size: 0.8rem;
+    padding: 6px 7px;
+  }
+  .banner-img {
+    max-width: 479px;
+    max-height: 200px;
+  }
+}
+
+/* 📱 Tablet */
+@media (min-width: 480px) and (max-width: 768px) {
+  .main-header {
+    transform: scale(1);
+    height: 36px;
+  }
+  .logo img {
+    height: 26px;
+  }
+  .main-header a {
+    font-size: 0.9rem;
+  }
+  .banner-img {
+    max-width: 768px;
+    max-height: 220px;
+  }
+}
+
+/* 💻 Desktop */
+@media (min-width: 1024px) {
+  .main-header {
+    transform: scale(1);
+    height: 40px;
+  }
+  .logo img {
+    height: 30px;
+  }
+  .main-header a {
+    font-size: 1rem;
+  }
+  .banner-img {
+    max-width: 400px;
+    max-height: 250px;
+  }
+}

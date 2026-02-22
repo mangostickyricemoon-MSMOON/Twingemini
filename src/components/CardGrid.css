@@ -1,0 +1,15 @@
+.mango-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* base desktop */
+  gap: 10px;
+  width: 75%;
+  max-width: 400px;
+  padding: 0px;          /* ลด padding ให้สมดุล */
+  box-sizing: border-box;
+  margin: 0 auto;         /* จัดกลางแนวนอน */
+
+  margin-top: 30px; /* ✅ ระยะห่างจาก Header */ 
+  margin-bottom: 40px;/* ✅ ระยะห่างจาก Footer */
+}
+
+
