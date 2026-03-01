@@ -86,6 +86,23 @@
     .confirm-no-btn {
       background: linear-gradient(90deg, #00ffff, #020a7a);
     }
+
+    /* ✅ Fullscreen Button */
+    .fullscreen-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .fullscreen-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
   </style>
   <script type="module" crossorigin src="/assets/index-C14AJ2C_.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-CqTfN4Nd.css">
@@ -115,6 +132,11 @@
 
   <!-- ✅ root ของ React -->
   <div id="root"></div>
+  
+  <!-- ✅ ปุ่ม Fullscreen -->
+  <div class="fullscreen-container" style="text-align:center; margin-top:20px;">
+    <button id="fullscreen-btn" class="fullscreen-btn">Fullscreen</button>
+  </div>
 
   <!-- ✅ Confirm Exit Modal (hidden by default) -->
   <div id="confirm-exit" class="confirm-exit-overlay" style="display:none;">
@@ -167,8 +189,9 @@
       pendingLink = null;
     });
 
-    // ✅ Fullscreen เมื่อกดปุ่ม Start (React จะส่ง event)
-    window.addEventListener("startGameFullscreen", () => {
+    // ✅ Fullscreen เมื่อกดปุ่ม Go Fullscreen
+    const fullscreenBtn = document.getElementById("fullscreen-btn");
+    fullscreenBtn.addEventListener("click", () => {
       const docEl = document.documentElement;
       if (docEl.requestFullscreen) {
         docEl.requestFullscreen().catch(err => {
