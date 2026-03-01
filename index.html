@@ -1,125 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Twingemini</title>
 
-    <!-- ✅ viewport สำหรับ responsive ทุกอุปกรณ์ -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Twingemini</title>
 
-    <!-- ✅ favicon -->
-    <link rel="icon" type="image/png" href="/src/assets/favicon.png" />
+  <!-- ✅ viewport สำหรับ responsive ทุกอุปกรณ์ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ✅ global stylesheet -->
+  <!-- ✅ favicon -->
+  <link rel="icon" type="image/png" href="/src/assets/favicon.png" />
 
-    <!-- ✅ Vite จะ inject asset เอง -->
+  <!-- ✅ global stylesheet -->
 
-    <!-- ✅ CSS สำหรับท้องฟ้าและดาว -->
-    <style>
-      html, body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background: radial-gradient(ellipse at bottom, #0d1c30 0%, #091324 100%),
-                    linear-gradient(to bottom, rgba(33,56,88, 0.8), rgba(24,47,78, 1));
-        overflow: hidden;
-      }
+  <!-- ✅ Vite จะ inject asset เอง -->
 
-      .star {
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: white;
-        border-radius: 50%;
-        animation: twinkle 2s infinite alternate;
-        z-index: -1;
-      }
+  <!-- ✅ CSS สำหรับท้องฟ้าและดาว -->
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at bottom, #0a1a33 0%, #0d1c30 0%, #091324 100%),
+        linear-gradient(to bottom, rgba(24, 41, 65, 0.8), rgba(24, 47, 78, 1));
+      overflow: hidden;
+    }
 
-      @keyframes twinkle {
-        from { opacity: 0.3; }
-        to   { opacity: 1; }
-      }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite alternate;
+      z-index: 1;
+    }
 
-      /* ✅ ปุ่ม fullscreen */
-      .fullscreen-btn {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 12px 24px;
-        border: 2px solid #00ffcc;
-        border-radius: 6px; /* ✅ ขอบสี่เหลี่ยมมนเล็กน้อย */
-        background: rgba(0,0,0,0.6);
-        color: #00ffcc;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 9999;
-      }
+    @keyframes twinkle {
+      from { opacity: 0.3; }
+      to { opacity: 1; }
+    }
 
-      .fullscreen-btn:hover {
-        background: rgba(0,255,204,0.2);
-        transform: translateX(-50%) scale(1.05);
-      }
-    </style>
-    <script type="module" crossorigin src="/assets/index-M7_fxfc8.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DKmFMW_D.css">
-  </head>
-  <body>
-    <!-- ✅ Header ใช้ index.css -->
-    <header class="main-header">
-      <div class="main-header-container">
-        <div class="logo">
-          <img src="assets/PlayX.png" alt="PlayX Logo" />
-        </div>
-        <nav>
-          <ul>
-            <li><a class="btn-home" href="https://www.msmoon.net">MSMoon</a></li>
-            <li><a class="btn-playx" href="https://mangoplayx.msmoon.net">MangoPlayX</a></li>
-            <li><a class="btn-donate" href="https://donate.msmoon.net">Donate</a></li>
-          </ul>
-        </nav>
+    /* ✅ Confirm Exit Modal */
+    .confirm-exit-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .confirm-exit-content {
+      background: rgba(17,17,17,0.8);
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255,0,100,0.6);
+    }
+
+    .confirm-exit-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .confirm-yes-btn,
+    .confirm-no-btn {
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .confirm-yes-btn {
+      background: linear-gradient(90deg, #ff0066, #ffcc00);
+    }
+
+    .confirm-no-btn {
+      background: linear-gradient(90deg, #00ffff, #020a7a);
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-ahQHsdMZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BmIJnc-V.css">
+</head>
+
+<body>
+  <!-- ✅ Header -->
+  <header class="main-header">
+    <div class="main-header-container">
+      <div class="logo">
+        <img src="assets/PlayX.png" alt="PlayX Logo" />
       </div>
-    </header>
-
-    <!-- ✅ Banner ใช้ index.css -->
-    <div class="banner">
-      <img src="assets/banner.jpg" alt="Site Banner" class="banner-img" />
+      <nav>
+        <ul>
+          <li><a class="btn-home" href="#" data-link="https://www.msmoon.net">MSMoon</a></li>
+          <li><a class="btn-playx" href="#" data-link="https://mangoplayx.msmoon.net">MangoPlayX</a></li>
+          <li><a class="btn-donate" href="#" data-link="https://donate.msmoon.net">Donate</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <!-- ✅ root ของ React -->
-    <div id="root"></div>
+  <!-- ✅ Banner -->
+  <div class="banner">
+    <img src="assets/banner.jpg" alt="Site Banner" class="banner-img" />
+  </div>
 
-    <!-- ✅ ปุ่ม fullscreen -->
-    <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
+  <!-- ✅ root ของ React -->
+  <div id="root"></div>
 
-    <!-- ✅ สคริปต์สร้างดาวสุ่ม -->
-    <script>
-      const numStars = 50;
-      for (let i = 0; i < numStars; i++) {
-        const star = document.createElement("div");
-        star.className = "star";
-        star.style.top = Math.random() * window.innerHeight + "px";
-        star.style.left = Math.random() * window.innerWidth + "px";
-        star.style.animationDuration = (1 + Math.random() * 3) + "s";
-        star.style.width = (Math.random() * 2 + 1) + "px";
-        star.style.height = star.style.width;
-        document.body.appendChild(star);
+  <!-- ✅ Confirm Exit Modal (hidden by default) -->
+  <div id="confirm-exit" class="confirm-exit-overlay" style="display:none;">
+    <div class="confirm-exit-content">
+      <h3>Do you want to leave this page?</h3>
+      <div class="confirm-exit-buttons">
+        <button class="confirm-yes-btn" id="confirm-yes">Yes</button>
+        <button class="confirm-no-btn" id="confirm-no">No</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ สคริปต์สร้างดาวสุ่ม + Confirm Exit -->
+  <script>
+    // สร้างดาวสุ่ม
+    const numStars = 50;
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * window.innerHeight + "px";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.animationDuration = (1 + Math.random() * 3) + "s";
+      star.style.width = (Math.random() * 2 + 1) + "px";
+      star.style.height = star.style.width;
+      document.body.appendChild(star);
+    }
+
+    // ✅ Confirm Exit Modal Logic
+    let pendingLink = null;
+    const confirmExit = document.getElementById("confirm-exit");
+    const confirmYes = document.getElementById("confirm-yes");
+    const confirmNo = document.getElementById("confirm-no");
+
+    document.querySelectorAll("nav a").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        pendingLink = link.getAttribute("data-link");
+        confirmExit.style.display = "flex";
+      });
+    });
+
+    confirmYes.addEventListener("click", () => {
+      if (pendingLink) {
+        window.location.href = pendingLink;
       }
+    });
 
-      // ✅ ฟังก์ชัน toggle fullscreen
-      function toggleFullscreen() {
-        const root = document.getElementById("root");
-        if (!document.fullscreenElement) {
-          root.requestFullscreen(); // ✅ fullscreen เฉพาะ #root
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          }
-        }
-      }
-    </script>
-  </body>
+    confirmNo.addEventListener("click", () => {
+      confirmExit.style.display = "none";
+      pendingLink = null;
+    });
+  </script>
+</body>
 </html>
