@@ -104,7 +104,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
   </style>
-  <script type="module" crossorigin src="/assets/index-C14AJ2C_.js"></script>
+  <script type="module" crossorigin src="/assets/index-Dn8qQU34.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-CqTfN4Nd.css">
 </head>
 
@@ -189,16 +189,20 @@
       pendingLink = null;
     });
 
-    // ✅ Fullscreen เมื่อกดปุ่ม Go Fullscreen
-    const fullscreenBtn = document.getElementById("fullscreen-btn");
-    fullscreenBtn.addEventListener("click", () => {
-      const docEl = document.documentElement;
-      if (docEl.requestFullscreen) {
-        docEl.requestFullscreen().catch(err => {
-          console.error("Fullscreen failed:", err);
-        });
-      }
-    });
+    // ✅ Fullscreen เมื่อกดปุ่ม Fullscreen
+      const fullscreenBtn = document.getElementById("fullscreen-btn");
+      fullscreenBtn.addEventListener("click", () => {
+        const docEl = document.documentElement;
+        if (docEl.requestFullscreen) {
+          docEl.requestFullscreen().then(() => {
+            // ✅ ซ่อนปุ่มหลังเข้า fullscreen
+            fullscreenBtn.style.display = "none";
+          }).catch(err => {
+            console.error("Fullscreen failed:", err);
+          });
+        }
+      });
+
   </script>
 </body>
 </html>
