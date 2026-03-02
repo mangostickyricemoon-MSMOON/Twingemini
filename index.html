@@ -5,29 +5,19 @@
   <meta charset="UTF-8" />
   <title>Twingemini</title>
 
-  <!-- ✅ viewport สำหรับ responsive ทุกอุปกรณ์ -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- ✅ favicon -->
   <link rel="icon" type="image/png" href="/src/assets/favicon.png" />
 
-  <!-- ✅ global stylesheet -->
-
-  <!-- ✅ Vite จะ inject asset เอง -->
-
-  <!-- ✅ CSS สำหรับพื้นหลังสีดำ -->
   <style>
-    html,
-    body {
+    html, body {
       width: 100%;
       height: 100%;
       margin: 0;
       padding: 0;
-      background-color: #000000; /* ✅ เปลี่ยนเป็นสีดำเรียบ */
+      background-color: #000000;
       overflow: hidden;
     }
 
-    /* ✅ Confirm Exit Modal */
     .confirm-exit-overlay {
       position: fixed;
       inset: 0;
@@ -70,30 +60,12 @@
     .confirm-no-btn {
       background: linear-gradient(90deg, #00ffff, #020a7a);
     }
-
-    /* ✅ Fullscreen Button */
-    .fullscreen-btn {
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      background: linear-gradient(90deg, #00c6ff, #0072ff);
-      color: #fff;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-    }
-
-    .fullscreen-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
   </style>
-  <script type="module" crossorigin src="/assets/index-CrseeLDf.js"></script>
+  <script type="module" crossorigin src="/assets/index-Bm5zOehW.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-DSczUO6h.css">
 </head>
 
 <body>
-  <!-- ✅ Header -->
   <header class="main-header">
     <div class="main-header-container">
       <div class="logo">
@@ -109,20 +81,13 @@
     </div>
   </header>
 
-  <!-- ✅ Banner -->
   <div class="banner">
     <img src="assets/banner.jpg" alt="Site Banner" class="banner-img" />
   </div>
 
-  <!-- ✅ root ของ React -->
   <div id="root"></div>
-  
-  <!-- ✅ ปุ่ม Fullscreen -->
-  <div class="fullscreen-container" style="text-align:center; margin-top:20px;">
-    <button id="fullscreen-btn" class="fullscreen-btn">Fullscreen</button>
-  </div>
 
-  <!-- ✅ Confirm Exit Modal (hidden by default) -->
+  <!-- ✅ Confirm Exit Modal -->
   <div id="confirm-exit" class="confirm-exit-overlay" style="display:none;">
     <div class="confirm-exit-content">
       <h3>Do you want to leave this page?</h3>
@@ -133,14 +98,19 @@
     </div>
   </div>
 
-  <!-- ✅ สคริปต์ Confirm Exit + Fullscreen -->
   <script>
-    // ✅ Confirm Exit Modal Logic
+    // ✅ ตั้งค่า initial state ตอนโหลด
+    window.addEventListener("load", () => {
+      history.replaceState({ modal: false }, "");
+      history.pushState({ modal: true }, ""); // dummy state
+    });
+
     let pendingLink = null;
     const confirmExit = document.getElementById("confirm-exit");
     const confirmYes = document.getElementById("confirm-yes");
     const confirmNo = document.getElementById("confirm-no");
 
+    // ✅ คลิกเมนู → เปิด modal
     document.querySelectorAll("nav a").forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault();
@@ -149,47 +119,31 @@
       });
     });
 
+    // ✅ Yes → ไปยังลิงก์ หรือย้อนกลับจริง ๆ
     confirmYes.addEventListener("click", () => {
       if (pendingLink) {
         window.location.href = pendingLink;
+      } else {
+        history.back(); // กลับไปหน้าก่อนหน้า
       }
     });
 
+    // ✅ No → ปิด modal และกลับเข้าเกม (อยู่ในหน้านี้ต่อ)
     confirmNo.addEventListener("click", () => {
       confirmExit.style.display = "none";
       pendingLink = null;
+      history.pushState({ modal: true }, ""); // เติม dummy state กลับเข้าไปใหม่
     });
 
-    // ✅ Fullscreen เมื่อกดปุ่ม Fullscreen
-    const fullscreenBtn = document.getElementById("fullscreen-btn");
-    fullscreenBtn.addEventListener("click", () => {
-      const docEl = document.documentElement;
-      if (docEl.requestFullscreen) {
-        docEl.requestFullscreen().then(() => {
-          fullscreenBtn.style.display = "none";
-        }).catch(err => console.error("Fullscreen failed:", err));
-      } else if (docEl.webkitRequestFullscreen) { // Safari iOS
-        docEl.webkitRequestFullscreen();
-        fullscreenBtn.style.display = "none";
+    // ✅ ดักจับ back/forward
+    window.addEventListener("popstate", (event) => {
+      if (event.state && event.state.modal) {
+        confirmExit.style.display = "flex";
+        // เติม dummy state กลับเข้าไปอีก เพื่อให้ทำงานได้หลายครั้ง
+        history.pushState({ modal: true }, "");
       }
     });
-
-    // ✅ แสดงปุ่มกลับมาเมื่อออกจาก fullscreen (รองรับทุกเบราว์เซอร์)
-    function handleFullscreenExit() {
-      if (
-        !document.fullscreenElement &&
-        !document.webkitFullscreenElement &&
-        !document.mozFullScreenElement &&
-        !document.msFullscreenElement
-      ) {
-        fullscreenBtn.style.display = "inline-block";
-      }
-    }
-
-    document.addEventListener("fullscreenchange", handleFullscreenExit);
-    document.addEventListener("webkitfullscreenchange", handleFullscreenExit);
-    document.addEventListener("mozfullscreenchange", handleFullscreenExit);
-    document.addEventListener("MSFullscreenChange", handleFullscreenExit);
   </script>
+
 </body>
 </html>
