@@ -61,7 +61,7 @@
       background: linear-gradient(90deg, #00ffff, #020a7a);
     }
   </style>
-  <script type="module" crossorigin src="/assets/index-Bm5zOehW.js"></script>
+  <script type="module" crossorigin src="/assets/index-BBi02oay.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-DSczUO6h.css">
 </head>
 
@@ -99,7 +99,7 @@
   </div>
 
   <script>
-    // ✅ ตั้งค่า initial state ตอนโหลด
+    // ✅ ตั้งค่า initial state ตอนโหลด (ของ confirm-exit)
     window.addEventListener("load", () => {
       history.replaceState({ modal: false }, "");
       history.pushState({ modal: true }, ""); // dummy state
@@ -119,31 +119,38 @@
       });
     });
 
-    // ✅ Yes → ไปยังลิงก์ หรือย้อนกลับจริง ๆ
+    // ✅ Yes → ไปยังลิงก์ หรือกลับไปหน้าเก่าก่อนเข้าเว็บเกม
     confirmYes.addEventListener("click", () => {
       if (pendingLink) {
         window.location.href = pendingLink;
       } else {
-        history.back(); // กลับไปหน้าก่อนหน้า
+        // กลับไปหน้าเก่าก่อนเข้าเว็บเกม
+        window.location.href = document.referrer || "/"; 
       }
     });
 
-    // ✅ No → ปิด modal และกลับเข้าเกม (อยู่ในหน้านี้ต่อ)
+    // ✅ No → ปิด modal และกลับเข้าเกม
     confirmNo.addEventListener("click", () => {
       confirmExit.style.display = "none";
       pendingLink = null;
-      history.pushState({ modal: true }, ""); // เติม dummy state กลับเข้าไปใหม่
+      history.pushState({ modal: true }, "");
     });
 
     // ✅ ดักจับ back/forward
     window.addEventListener("popstate", (event) => {
       if (event.state && event.state.modal) {
         confirmExit.style.display = "flex";
-        // เติม dummy state กลับเข้าไปอีก เพื่อให้ทำงานได้หลายครั้ง
         history.pushState({ modal: true }, "");
       }
     });
-  </script>
 
+    // ✅ ดักจับการออก fullscreen → เปิด Confirm Exit Modal
+    document.addEventListener("fullscreenchange", () => {
+      if (!document.fullscreenElement) {
+        confirmExit.style.display = "flex";
+      }
+    });
+  </script>
+  
 </body>
 </html>
