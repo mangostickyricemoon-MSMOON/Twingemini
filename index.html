@@ -60,9 +60,32 @@
     .confirm-no-btn {
       background: linear-gradient(90deg, #00ffff, #020a7a);
     }
+
+    /* ✅ Fullscreen Button */
+    .fullscreen-btn-container {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .fullscreen-btn {
+      background: linear-gradient(90deg, #00ffff, #020a7a);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,255,255,0.6);
+    }
+
+    .fullscreen-btn:hover {
+      background: linear-gradient(90deg, #ff0066, #ffcc00);
+    }
   </style>
-  <script type="module" crossorigin src="/assets/index-CfBHKz4T.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-BRAviire.css">
+  <script type="module" crossorigin src="/assets/index-DoJT3DQz.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CNvG-zqC.css">
 </head>
 
 <body>
@@ -84,8 +107,13 @@
   <div class="banner">
     <img src="assets/banner.jpg" alt="Site Banner" class="banner-img" />
   </div>
-
+  
   <div id="root"></div>
+  
+  <!-- ✅ Fullscreen Button -->
+  <div class="fullscreen-btn-container">
+    <button id="fullscreen-btn" class="fullscreen-btn">Fullscreen</button>
+  </div>
 
   <!-- ✅ Confirm Exit Modal -->
   <div id="confirm-exit" class="confirm-exit-overlay" style="display:none;">
@@ -124,7 +152,6 @@
       if (pendingLink) {
         window.location.href = pendingLink;
       } else {
-        // กลับไปหน้าเก่าก่อนเข้าเว็บเกม
         window.location.href = document.referrer || "/"; 
       }
     });
@@ -148,9 +175,42 @@
     document.addEventListener("fullscreenchange", () => {
       if (!document.fullscreenElement) {
         confirmExit.style.display = "flex";
+        fullscreenBtn.textContent = "Fullscreen"; // reset text
+      } else {
+        fullscreenBtn.textContent = "Exit Fullscreen";
       }
     });
-  </script>
+
+    // ✅ Fullscreen Button toggle
+      const fullscreenBtn = document.getElementById("fullscreen-btn");
+
+      fullscreenBtn.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+          const docEl = document.documentElement;
+          if (docEl.requestFullscreen) {
+            docEl.requestFullscreen();
+          } else if (docEl.webkitRequestFullscreen) {
+            docEl.webkitRequestFullscreen();
+          } else if (docEl.msRequestFullscreen) {
+            docEl.msRequestFullscreen();
+          }
+          fullscreenBtn.textContent = "Exit Fullscreen";
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+          fullscreenBtn.textContent = "Fullscreen";
+
+          // ✅ ยิง custom event ไป React
+          window.dispatchEvent(new Event("fullscreen-exit"));
+        }
+      });
+    </script>
+
   
 </body>
 </html>
