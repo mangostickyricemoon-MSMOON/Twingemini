@@ -84,8 +84,8 @@
       background: linear-gradient(90deg, #ff0066, #ffcc00);
     }
   </style>
-  <script type="module" crossorigin src="/assets/index-DoJT3DQz.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CNvG-zqC.css">
+  <script type="module" crossorigin src="/assets/index-BXa0lIv3.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C8QYH13P.css">
 </head>
 
 <body>
@@ -171,19 +171,23 @@
       }
     });
 
-    // ✅ ดักจับการออก fullscreen → เปิด Confirm Exit Modal
-    document.addEventListener("fullscreenchange", () => {
-      if (!document.fullscreenElement) {
-        confirmExit.style.display = "flex";
-        fullscreenBtn.textContent = "Fullscreen"; // reset text
-      } else {
-        fullscreenBtn.textContent = "Exit Fullscreen";
-      }
-    });
+    // ✅ ดักจับการเปลี่ยน fullscreen
+      document.addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement) {
+          // ออกจาก fullscreen → แสดงปุ่มอีกครั้ง
+          fullscreenBtn.style.display = "inline-block";
+          fullscreenBtn.textContent = "Fullscreen"; // ให้กลับมาเป็น Fullscreen
+        } else {
+          // เข้า fullscreen → ซ่อนปุ่ม
+          fullscreenBtn.style.display = "none";
+        }
+      });
+
 
     // ✅ Fullscreen Button toggle
       const fullscreenBtn = document.getElementById("fullscreen-btn");
 
+      // ✅ toggle fullscreen
       fullscreenBtn.addEventListener("click", () => {
         if (!document.fullscreenElement) {
           const docEl = document.documentElement;
@@ -194,21 +198,19 @@
           } else if (docEl.msRequestFullscreen) {
             docEl.msRequestFullscreen();
           }
-          fullscreenBtn.textContent = "Exit Fullscreen";
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-          } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-          }
-          fullscreenBtn.textContent = "Fullscreen";
-
-          // ✅ ยิง custom event ไป React
-          window.dispatchEvent(new Event("fullscreen-exit"));
+          // เข้า fullscreen → ซ่อนปุ่ม
+          fullscreenBtn.style.display = "none";
         }
       });
+
+      // ✅ ดักจับการเปลี่ยน fullscreen
+      document.addEventListener("fullscreenchange", () => {
+        if (!document.fullscreenElement) {
+          // ออกจาก fullscreen → แสดงปุ่มอีกครั้ง
+          fullscreenBtn.style.display = "inline-block";
+        }
+      });
+
     </script>
 
   
